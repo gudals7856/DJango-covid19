@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block menu1 %}
+<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSummary"
+   aria-expanded="false" aria-controls="collapseSummary">
+    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+    프로젝트 개요
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+</a>
+{% endblock %}
+
+
+{% block menu2 %}
+<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts"
+   aria-expanded="false" aria-controls="collapseLayouts">
+    <div class="sb-nav-link-icon"><i class="fas fa-atom"></i></div>
+    COVID-19<br>
+    염기서열 분석
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+</a>
+{% endblock %}
+
+
+{% block menu3 %}
+<a class="nav-link collapsed" href="#" data-toggle="collapse"
+   data-target="#collapseAnother" aria-expanded="false" aria-controls="collapseAnother">
+    <div class="sb-nav-link-icon"><i class="fas fa-chart-bar"></i></div>
+    COVID-19<br>
+    vs 타 코로나 바이러스
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+</a>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+
+<div id="layoutSidenav_content">
+    <main>
+        <form name="namecodeForm" action="{% url 'execute' %}" method="POST">
+            <div class="container-fluid">
+                <br><br><br><br>
+                <div style="margin: 0px auto 0px auto">
+                    <h3>데이터 입력</h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                {% csrf_token %}
+                                Select Namecode1 :
+                                <select id="namecode1" name="namecode1">
+                                    <option value="NC_045512">NC_045512 (COVID-19)</option>
+                                    <option value="NC_004718">NC_004718 (SARS)</option>
+                                    <option value="NC_019843">NC_019843 (MERS)</option>
+                                    <option value="KU131570">KU131570 (HCoV OC43)</option>
+                                    <option value="MH940245">MH940245 (HCoV HKU1)</option>
+                                    <option value="KU291448">KU291448 (HCoV 229E)</option>
+                                    <option value="KF530114">KF530114 (HCoV NL63)</option>
+                                    <option value="NC_001451">NC_001451 (Avian coronavirus)</option>
+                                    <option value="NC_010646">NC_010646 (Beluga Whale coronavirus)</option>
+                                </select>
+
+                            </div>
+                            <div class="card-body" style="overflow:auto; height:300px;">
+                                {% if sequence_obj1 %}
+                                {{ sequence_obj1.sequence }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                {% csrf_token %}
+                                Select Namecode2 :
+                                <select id="namecode2" name="namecode2">
+                                    <option value="NC_045512">NC_045512 (COVID-19)</option>
+                                    <option value="NC_004718">NC_004718 (SARS)</option>
+                                    <option value="NC_019843">NC_019843 (MERS)</option>
+                                    <option value="KU131570">KU131570 (HCoV OC43)</option>
+                                    <option value="MH940245">MH940245 (HCoV HKU1)</option>
+                                    <option value="KU291448">KU291448 (HCoV 229E)</option>
+                                    <option value="KF530114">KF530114 (HCoV NL63)</option>
+                                    <option value="NC_001451">NC_001451 (Avian coronavirus)</option>
+                                    <option value="NC_010646">NC_010646 (Beluga Whale coronavirus)</option>
+                                </select>
+                            </div>
+                            <div class="card-body" style="overflow:auto; height:300px;">
+                                {% if sequence_obj2 %}
+                                {{ sequence_obj2.sequence }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Alignment" style="margin: 5px auto 5px auto; width:200px">
+                </div>
+                <br>
+                <h3>Alignment 결과</h3>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card mb-4" style="width:700px">
+                            <div class="card-body" style="overflow:auto; height:1000px;">
+                                {% if alignment_obj %}
+                                <pre>{{ alignment_obj.align_sequence }}</pre>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin:0px 0px 0px 20px; height:400px; width:100px">
+                        <img src="{{ alignment_obj.image }}">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+
+
+{% endblock %}

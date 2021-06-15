@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block menu1 %}
+<a class="nav-link collapsed active" href="{% url 'intro-team' %}" data-toggle="collapse" data-target="#collapseSummary"
+   aria-expanded="false" aria-controls="collapseSummary">
+    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+    프로젝트 개요
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+</a>
+{% endblock %}
+
+{% block menu2 %}
+<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts"
+   aria-expanded="false" aria-controls="collapseLayouts">
+    <div class="sb-nav-link-icon"><i class="fas fa-atom"></i></div>
+    COVID-19 <br>
+    염기서열 분석
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+</a>
+{% endblock %}
+
+{% block menu3 %}
+<a class="nav-link collapsed" href="#" data-toggle="collapse"
+   data-target="#collapseAnother" aria-expanded="false" aria-controls="collapseAnother">
+    <div class="sb-nav-link-icon"><i class="fas fa-chart-bar"></i></div>
+    COVID-19 <br>
+    vs 타 코로나 바이러스
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+</a>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <img src="{% static 'image/팀원.PNG' %}">
+            <img src="{% static 'image/개발환경.PNG' %}">
+        </div>
+    </main>
+</div>
+{% endblock %}
